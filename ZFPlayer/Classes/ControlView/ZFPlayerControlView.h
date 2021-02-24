@@ -113,6 +113,12 @@
 /// 全屏模式
 @property (nonatomic, assign) ZFFullScreenMode fullScreenMode;
 
+/// 竖屏返回按钮事件
+@property (nonatomic,copy) void(^didbackAction)(void);
+
+/// 重播事件
+@property (nonatomic,copy) void(^didreplayAction)(void);
+
 /**
  设置标题、封面、全屏模式
 

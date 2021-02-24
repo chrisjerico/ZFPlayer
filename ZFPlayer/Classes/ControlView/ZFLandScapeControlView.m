@@ -42,7 +42,7 @@
 @property (nonatomic, strong) UIView *bottomToolView;
 /// 播放或暂停按钮
 @property (nonatomic, strong) UIButton *playOrPauseBtn;
-/// 播放的当前时间 
+/// 播放的当前时间
 @property (nonatomic, strong) UILabel *currentTimeLabel;
 /// 滑杆
 @property (nonatomic, strong) ZFSliderView *slider;
@@ -67,6 +67,7 @@
         [self.topToolView addSubview:self.backBtn];
         [self.topToolView addSubview:self.titleLabel];
         [self addSubview:self.bottomToolView];
+        [self addSubview:self.againBtn];
         [self.bottomToolView addSubview:self.playOrPauseBtn];
         [self.bottomToolView addSubview:self.currentTimeLabel];
         
@@ -93,7 +94,7 @@
     CGFloat min_view_w = self.bounds.size.width;
     CGFloat min_view_h = self.bounds.size.height;
     
-    CGFloat min_margin = 9; 
+    CGFloat min_margin = 9;
     
     min_x = 0;
     min_y = 0;
@@ -129,6 +130,13 @@
     min_w = 30;
     min_h = 30;
     self.playOrPauseBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    
+    min_x = 0;
+    min_y = 0;
+    min_w = 60;
+    min_h = 30;
+    self.againBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    self.againBtn.center = self.center;
     
     min_x = self.playOrPauseBtn.zf_right + 4;
     min_y = 0;
@@ -363,6 +371,12 @@
     }];
 }
 
+- (void)responseAgain {
+    if (self.didreplayAction) {
+        self.didreplayAction();
+    }
+}
+
 #pragma mark - setter
 
 - (void)setFullScreenMode:(ZFFullScreenMode)fullScreenMode {
@@ -459,4 +473,17 @@
     return _lockBtn;
 }
 
+- (UIButton *)againBtn {
+    if (!_againBtn) {
+        _againBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _againBtn.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        _againBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        _againBtn.hidden = YES;
+        _againBtn.layer.cornerRadius = 15;
+        _againBtn.layer.masksToBounds = YES;
+        [_againBtn setTitle:@"重 播" forState:0];
+        [_againBtn addTarget:self action:@selector(responseAgain) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _againBtn;
+}
 @end

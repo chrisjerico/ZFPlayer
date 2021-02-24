@@ -40,7 +40,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 /// 播放或暂停按钮
 @property (nonatomic, strong) UIButton *playOrPauseBtn;
-/// 播放的当前时间 
+/// 播放的当前时间
 @property (nonatomic, strong) UILabel *currentTimeLabel;
 /// 滑杆
 @property (nonatomic, strong) ZFSliderView *slider;
@@ -61,6 +61,8 @@
         [self addSubview:self.topToolView];
         [self addSubview:self.bottomToolView];
         [self addSubview:self.playOrPauseBtn];
+        [self addSubview:self.againBtn];
+        [self.topToolView addSubview:self.backBtn];
         [self.topToolView addSubview:self.titleLabel];
         [self.bottomToolView addSubview:self.currentTimeLabel];
         [self.bottomToolView addSubview:self.slider];
@@ -95,7 +97,13 @@
     
     min_x = 15;
     min_y = 5;
-    min_w = min_view_w - min_x - 15;
+    min_w = 30;
+    min_h = 30;
+    self.backBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    
+    min_x = 45;
+    min_y = 5;
+    min_w = min_view_w - min_x - 45;
     min_h = 30;
     self.titleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
@@ -111,6 +119,13 @@
     min_h = min_w;
     self.playOrPauseBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
     self.playOrPauseBtn.center = self.center;
+    
+    min_x = 0;
+    min_y = 0;
+    min_w = 60;
+    min_h = 30;
+    self.againBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    self.againBtn.center = self.center;
     
     min_x = min_margin;
     min_w = 62;
@@ -219,7 +234,7 @@
     self.currentTimeLabel.text = currentTimeString;
 }
 
-#pragma mark - public method 
+#pragma mark - public method
 
 /** 重置ControlView */
 - (void)resetControlView {
@@ -296,6 +311,18 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.slider.sliderBtn.transform = CGAffineTransformIdentity;
     }];
+}
+
+- (void)responseToBack {
+    if (self.didbackAction) {
+        self.didbackAction();
+    }
+}
+
+- (void)responseAgain {
+    if (self.didreplayAction) {
+        self.didreplayAction();
+    }
 }
 
 #pragma mark - setter
@@ -384,4 +411,26 @@
     return _fullScreenBtn;
 }
 
+- (UIButton *)backBtn {
+    if (!_backBtn) {
+        _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backBtn setImage:[UIImage imageNamed:@"nav_back"] forState:0];
+        [_backBtn addTarget:self action:@selector(responseToBack) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _backBtn;
+}
+
+- (UIButton *)againBtn {
+    if (!_againBtn) {
+        _againBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _againBtn.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        _againBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        _againBtn.hidden = YES;
+        _againBtn.layer.cornerRadius = 15;
+        _againBtn.layer.masksToBounds = YES;
+        [_againBtn setTitle:@"重 播" forState:0];
+        [_againBtn addTarget:self action:@selector(responseAgain) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _againBtn;
+}
 @end

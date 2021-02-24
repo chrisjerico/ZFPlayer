@@ -243,7 +243,7 @@
 }
 
 /// 音量改变的通知
-- (void)volumeChanged:(NSNotification *)notification {    
+- (void)volumeChanged:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     NSString *reasonstr = userInfo[@"AVSystemController_AudioVolumeChangeReasonNotificationParameter"];
     if ([reasonstr isEqualToString:@"ExplicitVolumeChange"]) {
@@ -700,6 +700,18 @@
             self.bottomPgrogress.value = value;
             [self autoFadeOutControlView];
         };
+        _portraitControlView.didbackAction = ^{
+            @zf_strongify(self);
+            if (self.didbackAction) {
+                self.didbackAction();
+            }
+        };
+        _portraitControlView.didreplayAction = ^{
+            @zf_strongify(self);
+            if (self.didreplayAction) {
+                self.didreplayAction();
+            }
+        };
     }
     return _portraitControlView;
 }
@@ -725,6 +737,12 @@
             self.bottomPgrogress.isdragging = NO;
             self.bottomPgrogress.value = value;
             [self autoFadeOutControlView];
+        };
+        _landScapeControlView.didreplayAction = ^{
+            @zf_strongify(self);
+            if (self.didreplayAction) {
+                self.didreplayAction();
+            }
         };
     }
     return _landScapeControlView;
