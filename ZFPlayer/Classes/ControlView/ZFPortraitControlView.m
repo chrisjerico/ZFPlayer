@@ -32,10 +32,6 @@
 #endif
 
 @interface ZFPortraitControlView () <ZFSliderViewDelegate>
-/// 底部工具栏
-@property (nonatomic, strong) UIView *bottomToolView;
-/// 顶部工具栏
-@property (nonatomic, strong) UIView *topToolView;
 /// 标题
 @property (nonatomic, strong) UILabel *titleLabel;
 /// 播放或暂停按钮

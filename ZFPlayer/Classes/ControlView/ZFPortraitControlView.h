@@ -35,10 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ZFPortraitControlView : UIView
 
 /// 底部工具栏
-@property (nonatomic, strong, readonly) UIView *bottomToolView;
+@property (nonatomic, strong) UIView *bottomToolView;
 
 /// 顶部工具栏
-@property (nonatomic, strong, readonly) UIView *topToolView;
+@property (nonatomic, strong) UIView *topToolView;
 
 /// 标题
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
