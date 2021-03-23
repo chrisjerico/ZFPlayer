@@ -407,7 +407,7 @@
     @zf_weakify(self)
     if (direction == ZFPanDirectionH && self.sumTime >= 0 && self.player.totalTime > 0) {
         [self.player seekToTime:self.sumTime completionHandler:^(BOOL finished) {
-            if (finished) {
+//            if (finished) {
                 @zf_strongify(self)
                 /// 左右滑动调节播放进度
                 [self.portraitControlView sliderChangeEnded];
@@ -416,7 +416,7 @@
                 if (self.controlViewAppeared) {
                     [self autoFadeOutControlView];
                 }
-            }
+//            }
             [self.player.currentPlayerManager play];
         }];
         if (self.seekToPlay) {
