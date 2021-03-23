@@ -203,6 +203,7 @@
                 self.slider.isdragging = NO;
                 if (self.sliderValueChanged) self.sliderValueChanged(value);
             }
+            [self.player.currentPlayerManager play];
         }];
         if (self.seekToPlay) {
             [self.player.currentPlayerManager play];

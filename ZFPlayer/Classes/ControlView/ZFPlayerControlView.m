@@ -417,6 +417,7 @@
                     [self autoFadeOutControlView];
                 }
             }
+            [self.player.currentPlayerManager play];
         }];
         if (self.seekToPlay) {
             [self.player.currentPlayerManager play];
