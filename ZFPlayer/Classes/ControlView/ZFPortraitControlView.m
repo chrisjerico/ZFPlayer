@@ -199,10 +199,10 @@
         @zf_weakify(self)
         [self.player seekToTime:self.player.totalTime*value completionHandler:^(BOOL finished) {
             @zf_strongify(self)
-            if (finished) {
+//            if (finished) {
                 self.slider.isdragging = NO;
                 if (self.sliderValueChanged) self.sliderValueChanged(value);
-            }
+//            }
             [self.player.currentPlayerManager play];
         }];
         if (self.seekToPlay) {
